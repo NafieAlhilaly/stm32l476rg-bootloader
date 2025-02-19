@@ -23,7 +23,7 @@ FLASH_MEM_ADRESS	= 0x08000000
 ###############################################################################
 # Linkerscript
 
-LDSCRIPT = linkerscript.ld
+LDSCRIPT    =  stm32l476rg.ld
 LDLIBS		+= -l$(LIBNAME)
 LDFLAGS		+= -L$(OPENCM3_DIR)/lib
 
@@ -55,6 +55,7 @@ CSTD		?= -std=c99
 # Source files
 
 OBJS		+= $(SRC_DIR)/$(BINARY).o
+OBJS		+= $(SRC_DIR)/bootloader.o
 
 ###############################################################################
 # C flags
