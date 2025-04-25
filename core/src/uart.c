@@ -1,10 +1,13 @@
 #include "uart.h"
 
-static uint8_t rec_data = 0U;
-static bool is_rec = false;
+static ring_buffer_t uart_rb = {0U};
+static uint8_t uart_buffer[RING_BUFFER_SIZE] = {0U};
 
 void uart_setup(void)
 {
+  // Set up ring buffer
+  ring_buffer_setup(&uart_rb, &uart_buffer, RING_BUFFER_SIZE - 1);
+
   /* Enable clocks for GPIO port A (for GPIO_USART2_TX) and USART2. */
   rcc_periph_clock_enable(RCC_USART2);
   rcc_periph_clock_enable(RCC_GPIOA);
@@ -28,8 +31,7 @@ void uart_setup(void)
 
 void usart2_isr(void){
   if(usart_get_flag(USART2, USART_FLAG_ORE) || usart_get_flag(USART2, USART_FLAG_RXNE)){
-    rec_data = (uint8_t)usart_recv(USART2);
-    is_rec = true;
+    ring_buffer_write(&uart_rb, (uint8_t)usart_recv(USART2));
   }
 }
 
@@ -42,12 +44,23 @@ void uart_write_byte(uint8_t data){
   usart_send_blocking(USART2, (uint16_t)data);
 }
 uint32_t uart_read(uint8_t* data, uint32_t length){
-  
+  if (length == 0){
+    return 0;
+  }
+
+  for(uint32_t bytes_read = 0; bytes_read < length; bytes_read++){
+    if(!ring_buffer_read(&uart_rb, &data[bytes_read])){
+
+    }
+  }
+
+  return length;
 }
 uint8_t uart_read_byte(void){
-  is_rec = false;
-  return rec_data;
+  uint8_t byte = 0;
+  uart_read(&byte, 1);
+  return byte;
 }
 bool uart_data_available(void){
- return is_rec; 
+ return !ring_buffer_empty(&uart_rb); 
 }
