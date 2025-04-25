@@ -3,7 +3,10 @@
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/cm3/nvic.h>
+#include "ring-buffer.h"
 
+
+#define RING_BUFFER_SIZE 64
 
 void uart_setup(void);
 void uart_write(uint8_t* data, const uint32_t length);
