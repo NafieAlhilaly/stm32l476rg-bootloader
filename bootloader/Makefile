@@ -10,6 +10,8 @@ INC_DIR        = inc
 OPENCM3_DIR    = ../libopencm3
 FLASH_TOOL     = st-flash
 BINARY		   = bootloader
+CORE_INC_DIR   = ../core/inc
+CORE_SRC_DIR   = ../core/src
 
 ###############################################################################
 # Basic Device Setup
@@ -32,6 +34,7 @@ LDFLAGS		+= -L$(OPENCM3_DIR)/lib
 
 DEFS		+= -I$(OPENCM3_DIR)/include
 DEFS		+= -I$(INC_DIR)
+DEFS		+= -I$(CORE_INC_DIR)
 
 ###############################################################################
 # Executables
@@ -55,6 +58,12 @@ CSTD		?= -std=c99
 # Source files
 
 OBJS		+= $(SRC_DIR)/$(BINARY).o
+OBJS		+= $(SRC_DIR)/comms.o
+OBJS		+= $(SRC_DIR)/bl.flash.o
+OBJS		+= $(CORE_SRC_DIR)/uart.o
+OBJS		+= $(CORE_SRC_DIR)/crc.o
+OBJS		+= $(CORE_SRC_DIR)/ring-buffer.o
+OBJS		+= $(CORE_SRC_DIR)/system.o
 
 ###############################################################################
 # C flags
