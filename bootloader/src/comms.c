@@ -95,7 +95,7 @@ void comms_update(void)
       }
       if (comms_is_single_byte_packet(&tmp_packet, PACKET_RETX_DATA0))
       {
-        comms_write(&packet_buffer);
+        comms_write(&retx_packet);
         state = CommsState_Length;
         break;
       }
