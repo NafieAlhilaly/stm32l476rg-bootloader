@@ -6,7 +6,7 @@ static uint8_t uart_buffer[RING_BUFFER_SIZE] = {0U};
 void uart_setup(void)
 {
   // Set up ring buffer
-  ring_buffer_setup(&uart_rb, &uart_buffer, RING_BUFFER_SIZE - 1);
+  ring_buffer_setup(&uart_rb, uart_buffer, RING_BUFFER_SIZE - 1);
 
   /* Enable clocks for GPIO port A (for GPIO_USART2_TX) and USART2. */
   rcc_periph_clock_enable(RCC_USART2);
