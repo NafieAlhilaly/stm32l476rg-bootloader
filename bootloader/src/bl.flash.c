@@ -1,10 +1,12 @@
 #include "bl.flash.h"
 
-void bl_flash_erase_firmware(void)
-{
+void bl_flash_erase_firmware(void) {
     flash_unlock();
-    for(uint8_t i = FIRMAWARE_PAGE_START; i <= FIRMAWARE_PAGE_END; i++){
+    for(uint32_t i = FIRMWARE_PAGE_START; i <= FIRMWARE_PAGE_END; i++) {
         flash_erase_page(i);
+        if (FLASH_SR & (FLASH_SR_PROGERR | FLASH_SR_WRPERR)) {
+            flash_clear_status_flags();
+        }
     }
     flash_lock();
 }
