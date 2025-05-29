@@ -1,4 +1,7 @@
 #include "commons-include.h"
+#include "uart.h"
+#include "crc.h"
+
 
 #define PACKET_DATA_LENGTH 16
 #define PACKET_LENGTH_BYTES 1
