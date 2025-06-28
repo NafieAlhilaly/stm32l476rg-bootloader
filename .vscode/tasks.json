@@ -1,0 +1,23 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "build_bootloader",
+            "options": {
+                "cwd": "bootloader",
+            },
+            "command": "make",
+            "problemMatcher": "$gcc"
+        },
+        {
+            "type": "shell",
+            "label": "build_firmware",
+            "options": {
+                "cwd": "firmware"
+            },
+            "command": "make",
+            "problemMatcher": "$gcc"
+        }
+    ],
+    "version": "2.0.0"
+}

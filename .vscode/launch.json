@@ -1,0 +1,56 @@
+{
+    "configurations": [
+        {
+            "name": "ST-Link: Debug Firmware",
+            "cwd": "${workspaceFolder}/firmware",
+            "executable": "./firmware.elf",
+            "servertype": "stlink",
+            "request": "launch",
+            "type": "cortex-debug",
+            "device": "STM32L476RG",
+            "runToEntryPoint": "main",
+            "interface": "swd",
+            "preLaunchTask": "build_firmware",
+            "gdbPath": "/bin/gdb-multiarch",
+        },
+        {
+            "name": "ST-Link: Debug Bootloader",
+            "cwd": "${workspaceFolder}/bootloader",
+            "executable": "./bootloader.elf",
+            "servertype": "stutil",
+            "request": "launch",
+            "type": "cortex-debug",
+            "device": "STM32L47x_L48x",
+            "runToEntryPoint": "main",
+            "interface": "swd",
+            "preLaunchTask": "build_bootloader",
+            "gdbPath": "/bin/gdb-multiarch",
+            
+        },
+        {
+            "name": "ST-Link: Attach to Application",
+            "cwd": "${workspaceFolder}/firmware",
+            "executable": "./firmware.elf",
+            "servertype": "stlink",
+            "request": "attach",
+            "type": "cortex-debug",
+            "device": "STM32L476RG",
+            "runToEntryPoint": "main",
+            "interface": "swd",
+            "gdbPath": "/bin/gdb-multiarch",
+        },
+        {
+            "name": "ST-Link: Attach to Bootloader",
+            "cwd": "${workspaceFolder}/bootloader",
+            "executable": "./bootloader.elf",
+            "servertype": "stlink",
+            "request": "attach",
+            "type": "cortex-debug",
+            "device": "STM32L47x_L48x",
+            "runToEntryPoint": "main",
+            "interface": "swd",
+            "gdbPath": "/bin/gdb-multiarch",
+        }
+    ],
+    "version": "2.0.0"
+}
