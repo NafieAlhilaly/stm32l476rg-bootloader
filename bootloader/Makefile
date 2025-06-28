@@ -64,6 +64,7 @@ OBJS		+= $(CORE_SRC_DIR)/uart.o
 OBJS		+= $(CORE_SRC_DIR)/crc.o
 OBJS		+= $(CORE_SRC_DIR)/ring-buffer.o
 OBJS		+= $(CORE_SRC_DIR)/system.o
+OBJS		+= $(CORE_SRC_DIR)/timer.o
 
 ###############################################################################
 # C flags
